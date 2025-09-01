@@ -1,0 +1,3 @@
+const dark = {
+    main: 'black'
+}
