@@ -3,7 +3,7 @@ import { Link } from "react-router"
 
 const Navbar = () => {
   return (
-    <header className={`bg-black text-white flex items-center justify-between p-4 lg:px-24`}>
+    <header className={`bg-black text-white flex items-center justify-between p-4 lg:px-24 border-b-2 border-gray-500`}>
       <div className="flex gap-2 items-center">
         <IoMdPulse className="text-2xl" />
         <h1 className="font-bold text-2xl">Shist</h1>
