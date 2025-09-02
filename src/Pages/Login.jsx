@@ -26,7 +26,7 @@ const Login = () => {
                             <div className="flex flex-col gap-2">
                                 <label htmlFor="signup-password-input">Password:</label>
                                 <input className="p-2 rounded-lg border-2 border-gray-600" required id="signup-password-input" type={`password`} placeholder="********" />
-                                <p className="text-gray-400 self-end cursor-pointer">Forgot password?</p>
+                                <Link className="text-gray-400 self-end cursor-pointer" to='/forgotpassword'>Forgot password?</Link>
                             </div>
                             <button className="py-2 bg-white w-[100%] text-black font-medium rounded-lg cursor-pointer">Log in</button>
                         </form>
