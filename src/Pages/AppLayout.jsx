@@ -6,7 +6,7 @@ const AppLayout = () => {
     return (
         <div>
             <Navbar />
-            <main className='h-[100vh] px-4'>
+            <main className='min-h-[100vh] flex flex-col mx-auto'>
                 <Outlet />
             </main>
             <Footer />
