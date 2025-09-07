@@ -1,0 +1,1 @@
+export const noFoodLoggedImg = "https://media.istockphoto.com/id/1062342358/vector/vegetables-and-fruits-character-collection.jpg?s=612x612&w=0&k=20&c=gghdLY3ckVGYo3OQ9NwcolS9sWAWhts8lXpEJzZdVlI="
