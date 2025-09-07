@@ -6,6 +6,7 @@ import Login from "./Pages/Login"
 import VerifyEmail from "./Pages/VerifyEmail"
 import Feedback from "./Pages/Feedback"
 import ForgotPassword from "./Pages/ForgotPassword"
+import Page404 from "./Pages/404"
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/forgotpassword' element={<ForgotPassword />} />
         <Route path="/verifyemail" element={<VerifyEmail />} />
+        <Route path="*" element={<Page404 />} />
       </Routes>
     </BrowserRouter>
       
