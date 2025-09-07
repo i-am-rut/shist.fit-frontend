@@ -8,7 +8,7 @@ import { NavLink, Outlet } from "react-router"
 
 const HealthMetrics = () => {
   return (
-    <div className="my-8 max-w-6xl mx-auto text-white">
+    <div className="my-8 max-w-6xl mx-auto text-white px-4">
       <div>
         <h2 className="font-bold text-2xl">Health Metrics</h2>
         <p className="text-gray-400">Track Your Health and Wellness Data</p>
@@ -59,7 +59,7 @@ const HealthMetrics = () => {
           </div>
         </Container>
       </div>
-      <div className="mt-6 w-full grid grid-cols-4 text-center bg-black rounded-lg px-2 py-2 border border-gray-400">
+      <div className="mt-6 mb-2 w-full grid grid-cols-4 text-center bg-black rounded-lg px-2 py-2 border border-gray-400">
         <NavLink className={({ isActive }) => `rounded-lg py-1 ${isActive ? "bg-[#18181c] border border-gray-400 font-medium" : ""}`} to='.' end >Weight</NavLink>
         <NavLink className={({ isActive }) => `rounded-lg py-1 ${isActive ? "bg-[#18181c] border border-gray-400 font-medium" : ""}`} to='sleep' >Sleep</NavLink>
         <NavLink className={({ isActive }) => `rounded-lg py-1 ${isActive ? "bg-[#18181c] border border-gray-400 font-medium" : ""}`} to='hydration' >Hydration</NavLink>

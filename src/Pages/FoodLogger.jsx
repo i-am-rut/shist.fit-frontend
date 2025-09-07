@@ -19,7 +19,7 @@ const FoodLogger = () => {
     }
 
     return (
-        <div className="max-w-6xl mx-auto text-white">
+        <div className="max-w-6xl mx-auto text-white px-4">
             <div className="flex items-center justify-between mt-4">
                 <div>
                     <h2 className="font-bold text-2xl">Food Logger</h2>
@@ -70,8 +70,8 @@ const FoodLogger = () => {
                     <div>{
                         recentFoods.length > 0 ? <div className="mt-4 ">
                             {
-                                recentFoods.map(item => (
-                                    <div className="mb-2">
+                                recentFoods.map((item, index) => (
+                                    <div className="mb-2" key={index}>
                                         <Container>
                                             <div className="flex justify-between items-center">
                                                 <div className="flex gap-4 items-center">
