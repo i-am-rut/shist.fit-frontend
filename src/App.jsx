@@ -7,6 +7,8 @@ import VerifyEmail from "./Pages/VerifyEmail"
 import Feedback from "./Pages/Feedback"
 import ForgotPassword from "./Pages/ForgotPassword"
 import Page404 from "./Pages/404"
+import Dashboard from "./Pages/Dashboard"
+import DashboardLayout from "./Pages/DashboardLayout"
 
 
 function App() {
@@ -17,6 +19,9 @@ function App() {
       <Routes>
         <Route path="/" element={<AppLayout />}>
           <Route index element={<HomePage />} />
+          <Route path="dashboard" element={<DashboardLayout />}>
+            <Route index element={<Dashboard />} />
+          </Route>
           <Route path='feedback' element={<Feedback />} />
         </Route>
         <Route path="/signup" element={<SignUp />} />
