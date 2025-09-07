@@ -94,8 +94,10 @@ const Dashboard = () => {
             <ResponsiveContainer>
               <LineChart data={data}>
                 <CartesianGrid strokeDasharray="3 5" />
-                <XAxis dataKey="day" />
-                <YAxis domain={['dataMin - 15', 'dataMax + 15']} />
+                <XAxis dataKey="day" stroke="#ffffff"  />
+                <YAxis
+                    stroke="#ffffff" 
+                    domain={['dataMin - 15', 'dataMax + 15']} />
                 <Tooltip className='rounded-lg bg-black text-white' />
                 <Legend />
                 <ReferenceLine 

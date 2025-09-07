@@ -59,7 +59,7 @@ const HomePage = () => {
           </div>
         </div>
         <div>
-          <img className='rounded-lg border-3 border-gray-400' src='https://raw.githubusercontent.com/i-am-rut/Images/refs/heads/main/dashboard.png' alt='dashboard' />
+          <img  className='rounded-lg border-3 border-gray-400' src='https://raw.githubusercontent.com/i-am-rut/Images/refs/heads/main/Screenshot%202025-09-07%20150414.png' alt='dashboard' />
         </div>
       </div>
       <div className='bg-[#fafafa] text-black flex flex-col items-center justify-center gap-8 py-12'>
