@@ -9,8 +9,8 @@ import { Link } from 'react-router'
 const HomePage = () => {
   return (
     <div>
-      <div className='bg-black text-white flex flex-col justify-center items-center gap-4 py-16'>
-        <h1 className='text-3xl md:text-5xl lg:text-6xl font-bold'>Track Your Health Journey</h1>
+      <div className='bg-black text-white flex flex-col justify-center items-center gap-4 py-16 px-4'>
+        <h1 className='text-3xl md:text-5xl lg:text-6xl font-bold text-center'>Track Your Health Journey</h1>
         <p className='text-gray-400 max-w-2xl text-center px-2 lg:p-4 md:text-xl lg:text-2xl'>Monitor your neutrition, track your progress, and achieve your health goals with our comprehensive health tracking platform</p>
         <div className='grid sm:grid-cols-2 gap-2'>
           <Link className='bg-white text-black text-center font-medium px-4 py-2  rounded-lg' to='signup'>Get started</Link>

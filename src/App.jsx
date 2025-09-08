@@ -19,6 +19,7 @@ import Goals from "./Pages/Goals"
 import GoalSetting from "./Pages/GoalSetting"
 import GoalsOverview from "./Pages/GoalsOverview"
 import Profile from "./Pages/Profile"
+import Settings from "./Pages/Settings"
 
 
 function App() {
@@ -45,6 +46,7 @@ function App() {
           </Route>
           <Route path="profile" element={<Profile />} />
           <Route path='feedback' element={<Feedback />} />
+          <Route path="settings" element={<Settings />} />
         </Route>
         <Route path="/signup" element={<SignUp />} />
         <Route path='/login' element={<Login />} />
