@@ -18,6 +18,7 @@ import HealthMetricsActivity from "./Pages/HealthMetricsActivity"
 import Goals from "./Pages/Goals"
 import GoalSetting from "./Pages/GoalSetting"
 import GoalsOverview from "./Pages/GoalsOverview"
+import Profile from "./Pages/Profile"
 
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
             <Route index element={<GoalsOverview />} />
             <Route path="goal-settings" element={<GoalSetting />} />
           </Route>
+          <Route path="profile" element={<Profile />} />
           <Route path='feedback' element={<Feedback />} />
         </Route>
         <Route path="/signup" element={<SignUp />} />
