@@ -2,7 +2,7 @@ import { NavLink, Outlet } from "react-router"
 
 const Goals = () => {
     return (
-        <div className="bg-[#18181c text-white mt-8 px-2 sm:px-8 lg:px-12">
+        <div className="bg-[#18181c] text-white mt-8 px-2 sm:px-8 lg:px-12">
             <div>
                 <h1 className="sm:text-lg md:text-2xl lg:text-3xl font-bold self-start">Health Goals</h1>
             </div>
