@@ -47,7 +47,7 @@ const COLORS = ['#309898', '#F4631E', '#CB0404'];
 
 const Dashboard = () => {
   return (
-    <div className="max-w-6xl mx-auto mt-8 text-white px-4">
+    <div className="max-w-7xl mx-auto mt-8 text-white px-4">
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
         <Container>
           <div className="flex items-center justify-between">
