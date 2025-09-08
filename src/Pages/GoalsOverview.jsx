@@ -96,9 +96,9 @@ const GoalsOverview = () => {
         <div className="mt-6">
           <div className="flex items-center justify-between">
             <h3 className="font-medium">Weight Loss</h3>
-            <p>0%</p>
+            <p>60%</p>
           </div>
-          <ProgressBar progress={0} />
+          <ProgressBar progress={60} />
           <div className="flex items-center justify-between text-gray-400 text-sm mt-2">
             <p>Starting: 73</p>
             <p>Current: 66.2</p>
