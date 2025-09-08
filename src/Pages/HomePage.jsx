@@ -64,7 +64,7 @@ const HomePage = () => {
       </div>
       <div className='bg-[#fafafa] text-black flex flex-col items-center justify-center gap-8 py-12'>
         <h2 className='sm:text-2xl md:text-4xl lg:text-4xl font-bold'>Start Your Health Journey Today</h2>
-        <p className='max-w-2xl text-center md:text-xl lg:text-2xl font-normal text-gray-600'>Join thousands of users who have transformed their health with <b>Shist.</b></p>
+        <p className='max-w-2xl text-center md:text-xl lg:text-2xl font-normal text-gray-600'>Join hundreds of users who have transformed their health with <b>Shist.</b></p>
         <Link className='px-4 py-2 text-white bg-black font-medium rounded-lg ' to='/signup'>Sign up for free</Link>
       </div>
     </div>

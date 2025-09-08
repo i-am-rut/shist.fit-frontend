@@ -15,6 +15,9 @@ import HealthMetricsWeight from "./Pages/HealthMetricsWeight"
 import HealthMetricsSleep from "./Pages/HealthMetricsSleep"
 import HealthMetricsHydration from "./Pages/HealthMetricsHydration"
 import HealthMetricsActivity from "./Pages/HealthMetricsActivity"
+import Goals from "./Pages/Goals"
+import GoalSetting from "./Pages/GoalSetting"
+import GoalsOverview from "./Pages/GoalsOverview"
 
 
 function App() {
@@ -34,6 +37,10 @@ function App() {
               <Route path="hydration" element={<HealthMetricsHydration />} />
               <Route path="activity" element={<HealthMetricsActivity />} />
             </Route>
+          </Route>
+          <Route path="goals" element={<Goals />} >
+            <Route index element={<GoalsOverview />} />
+            <Route path="goal-settings" element={<GoalSetting />} />
           </Route>
           <Route path='feedback' element={<Feedback />} />
         </Route>
