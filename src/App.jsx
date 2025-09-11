@@ -20,6 +20,7 @@ import GoalSetting from "./Pages/GoalSetting"
 import GoalsOverview from "./Pages/GoalsOverview"
 import Profile from "./Pages/Profile"
 import Settings from "./Pages/Settings"
+import { Bounce, ToastContainer } from "react-toastify"
 
 
 function App() {
@@ -54,6 +55,19 @@ function App() {
         <Route path="/verifyemail" element={<VerifyEmail />} />
         <Route path="*" element={<Page404 />} />
       </Routes>
+      <ToastContainer
+        position="bottom-right"
+        theme="dark"
+        rtl={false}
+        autoClose={5000}
+        newestOnTop
+        closeOnClick={false}
+        closeButton
+        pauseOnHover
+        transition={Bounce}
+        hideProgressBar={false}
+        draggable
+      />
     </BrowserRouter>
       
     </>

@@ -1,11 +1,18 @@
 import { IoMdPulse } from "react-icons/io"
 import Footer from "../components/Footer"
 import { FaArrowLeft } from "react-icons/fa6"
-import { Link } from "react-router"
+import { Link, useNavigate } from "react-router"
+import { notifySuccess } from "../utils/toasts.jsx"
 
 
 const ForgotPassword = () => {
     const page = 'otp'
+    // const navigate = useNavigate()
+    // const handleRequestOTP = () => {
+    //     notifySuccess("Otp sent")
+    //     navigate('/login')
+    // }
+
     return (
         <div>
             <div className="bg-[#18181a] min-h-[100vh]">
