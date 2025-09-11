@@ -5,18 +5,19 @@ import { Link } from "react-router"
 
 
 const ForgotPassword = () => {
+    const page = 'otp'
     return (
         <div>
             <div className="bg-[#18181a] min-h-[100vh]">
                 <Link to='/' className="text-gray-400 font-medium flex gap-2 items-center p-4 cursor-pointer">
                     <FaArrowLeft /> Back to home
                 </Link>
-                <div className="flex flex-col justify-center items-center p-2">
-                    <div className="flex gap-2 text-white py-8 font-bold text-2xl text-center items-center">
+                <div className="mx-auto p-2">
+                    <div className="flex gap-2 text-white py-8 font-bold text-2xl justify-center items-center">
                         <IoMdPulse />
                         <h1>Shist</h1>
                     </div>
-                    <div className="text-white mx-auto flex justify-center p-12 w-[100%]">
+                    {page === 'otp' ? <div className="text-white mx-auto flex justify-center p-12">
                         <div className="flex flex-col gap-4 justify-center items-start p-4 sm:p-8 lg:p-12 max-w-3xl">
                             <h1 className="text-2xl font-bold">Forgot password</h1>
                             <p>Enter your email below you will receive an email with an OTP.</p>
@@ -31,7 +32,20 @@ const ForgotPassword = () => {
                             </div>
                             <button className="px-4 py-2 bg-green-400 font-bold rounded-lg self-end cursor-pointer">Submit</button>
                         </div>
-                    </div>
+                    </div> : <div className="text-white mx-auto  p-4 lg:p-12">
+                        <form className="p-4 sm:p-8 lg:p-12 max-w-3xl bg-black mx-auto border-4 border-gray-600 rounded-lg min-w-[16rem]">
+                            <h2 className="text-2xl font-medium">Reset Password</h2>
+                            <div className="flex flex-col justify-center gap-4 mt-4">
+                                <label>Enter New Password</label>
+                                <input className="px-4 py-2 rounded-lg border border-gray-600" type="password" placeholder="********"/>
+                            </div>
+                            <div className="flex flex-col justify-center gap-4 mt-4">
+                                <label>Confirm New Password</label>
+                                <input className="px-4 py-2 rounded-lg border border-gray-600" type="password" placeholder="********"/>
+                            </div>
+                            <button className="bg-green-400 text-white px-4 py-2 rounded-lg mt-6">Reset Password</button>
+                        </form>
+                    </div>}
                 </div>
             </div>
             <Footer />

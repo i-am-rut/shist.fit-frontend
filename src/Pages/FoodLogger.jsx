@@ -19,13 +19,13 @@ const FoodLogger = () => {
     }
 
     return (
-        <div className="max-w-7xl mx-auto text-white px-4">
+        <div className="max-w-7xl mx-auto text-white px-4 relative">
             <div className="flex items-center justify-between mt-4">
                 <div>
                     <h2 className="font-bold text-2xl">Food Logger</h2>
                     <p className="text-gray-400">Track your daily nutrition</p>
                 </div>
-                <button className="px-4 py-2 bg-white text-black font-bold rounded-md">+ Add Food</button>
+                <button className="px-4 py-2 bg-white text-black font-bold rounded-md cursor-pointer">+ Add Food</button>
             </div>
             <div className="grid md:grid-cols-3 gap-4 mt-8">
                 <Container>
