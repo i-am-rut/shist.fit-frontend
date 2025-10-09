@@ -1,17 +1,37 @@
+import axios from "axios"
 import { useEffect, useRef, useState } from "react"
 import { CgProfile } from "react-icons/cg"
 import { IoMdPulse } from "react-icons/io"
 import { MdClose, MdFeedback, MdMenu } from "react-icons/md"
 import { PiGearBold } from "react-icons/pi"
 import { TbLogout } from "react-icons/tb"
+import { useDispatch, useSelector } from "react-redux"
 import { Link, NavLink } from "react-router"
+import { notifyError, notifySuccess } from "../utils/toasts"
+import { setUser } from "../utils/slices/userSlice"
 
 const Navbar = () => {
-  const user = false
+  const user = useSelector(state => state.user.user) 
+  const dispatch = useDispatch()
   const [showMenu, setShowMenu] = useState(false)
   const [showDrawer, setShowDrawer] = useState(false)
   const profileMenuRef = useRef(null)
   const drawerRef = useRef(null)
+
+  const handleLogoutClick = async() => {
+    try {
+      const res = await axios.post(`${import.meta.env.VITE_SERVER_URL}/auth/logout`, {}, {withCredentials: true})
+      dispatch(setUser('null'))
+      notifySuccess("Logged out successfully")
+    }catch (err) {
+      if(err.response?.data?.message || err.response?.data?.error) {
+          notifyError('Failed to Logout', err.response?.data?.message || err.response?.data?.error)
+      } else {
+          console.error(err.response)
+          notifyError('Failed to Logout', 'Try again after some time.')
+      }
+    }
+  }
 
   useEffect(() => {
   const handleClickOutside = (e) => {
@@ -37,12 +57,16 @@ const Navbar = () => {
         <IoMdPulse className="text-2xl" />
         <h1 className="font-bold text-2xl">Shist</h1>
       </div>
-      {user ? <div>
-        <div className="hidden sm:flex gap-4 text-gray-400">
-          <NavLink className={({ isActive }) => `${isActive ? ' text-white font-bold' : ''}`} to='/dashboard'>Dashboard</NavLink>
-          <NavLink className={({ isActive }) => `${isActive ? ' text-white font-bold' : ''}`} to='/goals'>Goals</NavLink>
-          <NavLink className={({ isActive }) => `${isActive ? ' text-white font-bold' : ''}`} to='/profile'>Profile</NavLink>
+      {(user && user !== 'null') && 
+        <div className="flex items-center justify-between">
+          <div className="hidden sm:flex gap-4 text-gray-400">
+            <NavLink className={({ isActive }) => `${isActive ? ' text-white font-bold' : ''}`} to='/dashboard'>Dashboard</NavLink>
+            <NavLink className={({ isActive }) => `${isActive ? ' text-white font-bold' : ''}`} to='/goals'>Goals</NavLink>
+            <NavLink className={({ isActive }) => `${isActive ? ' text-white font-bold' : ''}`} to='/profile'>Profile</NavLink>
+          </div>
         </div>
+      }
+      {(user && user !== 'null') && 
         <div className="flex gap-5">
           <div className="sm:hidden flex items-center gap-4">
             <MdMenu onClick={() => setShowDrawer(true)} className="text-4xl py-0.5 px-1 cursor-pointer  border-3 border-white  rounded-md" />
@@ -51,8 +75,8 @@ const Navbar = () => {
             <CgProfile onClick={() => setShowMenu(prev => !prev)} className="text-white font-medium text-4xl cursor-pointer" />
             {showMenu? <div className="max-w-2xs min-w-52 absolute top-10 right-0 p-4 border-2 border-gray-600 rounded-lg bg-black">
               <Link to='/profile' onClick={() => setShowMenu(false)} className="py-2">
-                <p className="font-bold">John</p>
-                <p className="text-sm text-gray-400">name@example.com{'itha ... lawaw lagal'}</p>
+                <p className="font-bold">{user?.name}</p>
+                <p className="text-sm text-gray-400">{user?.email?.length > 16 ? user?.email.substring(0, 11) + '...' : user?.email}</p>
               </Link>
               <hr className="mt-2 text-gray-600" />
               <div className="flex flex-col justify-center gap-2 py-4 border-b-2 border-gray-600">
@@ -66,7 +90,7 @@ const Navbar = () => {
                 </Link>
               </div>
               <div className="py-2">
-                <button className="flex gap-2 font-bold items-center cursor-pointer"><TbLogout className="text-xl" /> Logout</button>
+                <button onClick={handleLogoutClick} className="flex gap-2 font-bold items-center cursor-pointer"><TbLogout className="text-xl" />Logout</button>
               </div>
             </div> : null}
           </div>
@@ -87,10 +111,13 @@ const Navbar = () => {
             </div>
           )}
         </div>
-      </div> : <div className="flex gap-2">
-        <Link className={`bg-black border-2 font-medium border-gray-600 py-2 px-4 rounded-lg`} to='/login' >Log in</Link>
-        <Link className="bg-white text-gray-900 font-medium border-2 border-gray-600 py-2 px-4 rounded-lg" to='/signup' >Sign up</Link>
-      </div>}
+      }
+      {(!user || user === 'null') && 
+        <div className="flex gap-2">
+          <Link className={`bg-black border-2 font-medium border-gray-600 py-2 px-4 rounded-lg`} to='/login' >Log in</Link>
+          <Link className="bg-white text-gray-900 font-medium border-2 border-gray-600 py-2 px-4 rounded-lg" to='/signup' >Sign up</Link>
+        </div>
+      }
     </header>
   )
 }

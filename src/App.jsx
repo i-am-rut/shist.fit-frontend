@@ -21,6 +21,7 @@ import GoalsOverview from "./Pages/GoalsOverview"
 import Profile from "./Pages/Profile"
 import Settings from "./Pages/Settings"
 import { Bounce, ToastContainer } from "react-toastify"
+import AuthLayout from "./Pages/AuthLayout"
 
 
 function App() {
@@ -29,26 +30,28 @@ function App() {
     <>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<AppLayout />}>
-          <Route index element={<HomePage />} />
-          <Route path="dashboard" element={<DashboardLayout />}>
-            <Route index element={<Dashboard />} />
-            <Route path="foodlog" element={<FoodLogger />} />
-            <Route path='healthmetrics' element={<HealthMetrics />}>
-              <Route index element={<HealthMetricsWeight />} />
-              <Route path="sleep" element={<HealthMetricsSleep />} />
-              <Route path="hydration" element={<HealthMetricsHydration />} />
-              <Route path="activity" element={<HealthMetricsActivity />} />
+          <Route path="/" element={<AppLayout />}>
+            <Route index element={<HomePage />} />
+            <Route element={<AuthLayout />}>
+              <Route path="dashboard" element={<DashboardLayout />}>
+                <Route index element={<Dashboard />} />
+                <Route path="foodlog" element={<FoodLogger />} />
+                <Route path='healthmetrics' element={<HealthMetrics />}>
+                  <Route index element={<HealthMetricsWeight />} />
+                  <Route path="sleep" element={<HealthMetricsSleep />} />
+                  <Route path="hydration" element={<HealthMetricsHydration />} />
+                  <Route path="activity" element={<HealthMetricsActivity />} />
+                </Route>
+              </Route>
+              <Route path="goals" element={<Goals />} >
+                <Route index element={<GoalsOverview />} />
+                <Route path="goal-settings" element={<GoalSetting />} />
+              </Route>
+              <Route path="profile" element={<Profile />} />
+              <Route path='feedback' element={<Feedback />} />
+              <Route path="settings" element={<Settings />} />
             </Route>
           </Route>
-          <Route path="goals" element={<Goals />} >
-            <Route index element={<GoalsOverview />} />
-            <Route path="goal-settings" element={<GoalSetting />} />
-          </Route>
-          <Route path="profile" element={<Profile />} />
-          <Route path='feedback' element={<Feedback />} />
-          <Route path="settings" element={<Settings />} />
-        </Route>
         <Route path="/signup" element={<SignUp />} />
         <Route path='/login' element={<Login />} />
         <Route path='/forgotpassword' element={<ForgotPassword />} />

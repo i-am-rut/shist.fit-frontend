@@ -24,7 +24,7 @@ const ForgotPassword = () => {
                         <IoMdPulse />
                         <h1>Shist</h1>
                     </div>
-                    {page === 'otp' ? <div className="text-white mx-auto flex justify-center p-12">
+                    {page === 'otp' ? <div className="text-white mx-auto flex justify-center p-4 lg:p-12">
                         <div className="flex flex-col gap-4 justify-center items-start p-4 sm:p-8 lg:p-12 max-w-3xl">
                             <h1 className="text-2xl font-bold">Forgot password</h1>
                             <p>Enter your email below you will receive an email with an OTP.</p>
