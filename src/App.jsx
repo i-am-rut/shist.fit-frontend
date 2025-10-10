@@ -23,6 +23,7 @@ import Settings from "./Pages/Settings"
 import { Bounce, ToastContainer } from "react-toastify"
 import AuthLayout from "./Pages/AuthLayout"
 import ScrollToTop from "./components/ScrollToTop"
+import Verify from "./Pages/Verify"
 
 
 function App() {
@@ -58,6 +59,7 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/forgotpassword' element={<ForgotPassword />} />
         <Route path="/verifyemail" element={<VerifyEmail />} />
+        <Route path="/verify" element={<Verify />} />
         <Route path="*" element={<Page404 />} />
       </Routes>
       <ToastContainer
