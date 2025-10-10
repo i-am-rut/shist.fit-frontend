@@ -22,6 +22,7 @@ import Profile from "./Pages/Profile"
 import Settings from "./Pages/Settings"
 import { Bounce, ToastContainer } from "react-toastify"
 import AuthLayout from "./Pages/AuthLayout"
+import ScrollToTop from "./components/ScrollToTop"
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
   return (
     <>
     <BrowserRouter>
+      <ScrollToTop />
       <Routes>
           <Route path="/" element={<AppLayout />}>
             <Route index element={<HomePage />} />
