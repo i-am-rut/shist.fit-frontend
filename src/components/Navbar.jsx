@@ -73,7 +73,7 @@ const Navbar = () => {
           </div>
           <div className="relative" ref={profileMenuRef}>
             <CgProfile onClick={() => setShowMenu(prev => !prev)} className="text-white font-medium text-4xl cursor-pointer" />
-            {showMenu? <div className="max-w-2xs min-w-52 absolute top-10 right-0 p-4 border-2 border-gray-600 rounded-lg bg-black">
+            {showMenu? <div className="max-w-2xs min-w-52 absolute z-[100] top-10 right-0 p-4 border-2 border-gray-600 rounded-lg bg-black">
               <Link to='/profile' onClick={() => setShowMenu(false)} className="py-2">
                 <p className="font-bold">{user?.name}</p>
                 <p className="text-sm text-gray-400">{user?.email?.length > 16 ? user?.email.substring(0, 11) + '...' : user?.email}</p>

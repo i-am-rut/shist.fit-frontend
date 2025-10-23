@@ -1,7 +1,9 @@
 import { CgProfile } from "react-icons/cg"
+import {  useSelector } from "react-redux"
 
 
 const Profile = () => {
+    const user = useSelector(state => state.user.user)
     return (
         <div className="bg-[#18181c] text-white mt-8 px-2 sm:px-8 lg:px-12">
             <div className="max-w-7xl">
@@ -19,17 +21,17 @@ const Profile = () => {
                     <form className="grid md:grid-cols-2 gap-4">
                         <div className="flex flex-col gap-2">
                             <label htmlFor="profile-name">Full name</label>
-                            <input id="profile-name" minLength={2} maxLength={100} className="px-4 py-2 border border-gray-600 rounded-lg" disabled />
+                            <input value={user.name} id="profile-name" minLength={2} maxLength={100} className="px-4 py-2 border border-gray-600 rounded-lg" disabled />
                             <p className="text-sm text-gray-400">Name can not be changed</p>
                         </div>
                         <div className="flex flex-col gap-2">
                             <label htmlFor="profile-email">Email</label>
-                            <input id="profile-email" type="email" className="px-4 py-2 border border-gray-600 rounded-lg" disabled />
+                            <input value={user.email} id="profile-email" type="email" className="px-4 py-2 border border-gray-600 rounded-lg" disabled />
                             <p className="text-sm text-gray-400">Email can not be changed</p>
                         </div>
                         <div className="flex flex-col gap-2 mt-4">
                             <label htmlFor="profile-age">Age</label>
-                            <input id="profile-age" type="number" min={5} max={150} className="px-4 py-2 border border-gray-600 rounded-lg" />
+                            <input id="profile-age" type="number" min={5} max={150} className="px-4 py-2 border border-gray-600 rounded-lg" placeholder="Enter your age" />
                         </div>
                         <div className="flex flex-col gap-2 mt-4">
                             <label htmlFor="profile-gender">Gender</label>
@@ -43,11 +45,11 @@ const Profile = () => {
                         </div>
                         <div className="flex flex-col gap-2 mt-4">
                             <label htmlFor="profile-height">Height (cm)</label>
-                            <input id="profile-height" type="number" min={50} max={300} className="px-4 py-2 border border-gray-600 rounded-lg" />
+                            <input id="profile-height" type="number" min={50} max={300} className="px-4 py-2 border border-gray-600 rounded-lg" placeholder="Enter your height in cm."/>
                         </div>
                         <div className="flex flex-col gap-2 mt-4">
                             <label htmlFor="profile-weight">Current weight (Kg)</label>
-                            <input id="profile-weight" type="number" min={30} max={250} className="px-4 py-2 border border-gray-600 rounded-lg" />
+                            <input id="profile-weight" type="number" min={30} max={250} className="px-4 py-2 border border-gray-600 rounded-lg" placeholder="Enter current weight in Kg" />
                         </div>
                         <button className="px-4 py-2 bg-white text-black rounded-lg w-40 font-medium">Save Changes</button>
                     </form>

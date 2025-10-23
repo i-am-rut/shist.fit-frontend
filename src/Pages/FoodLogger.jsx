@@ -3,6 +3,8 @@ import { FaBowlFood } from "react-icons/fa6"
 import { PiBowlFoodBold } from "react-icons/pi"
 import { noFoodLoggedImg } from "../assets/constants"
 import Container from "../components/Container"
+import { useState } from "react"
+import FoodLogModal from "../components/FoodLogModal"
 
 const recentFoods = [
     { name: "Oatmeal with berries", calories: 420, time: "8:30 AM", meal: "Breakfast" },
@@ -11,6 +13,7 @@ const recentFoods = [
 ]
 
 const FoodLogger = () => {
+    const [showModal, setShowModal] = useState(false)
     const tagColor = {
         Breakfast: "#309898",
         Lunch: "#FF9F00",
@@ -18,14 +21,19 @@ const FoodLogger = () => {
         dinner: "#CB0404"
     }
 
+    const handleAddFoodClick = () => {
+        setShowModal(true)
+    }
+
     return (
         <div className="max-w-7xl mx-auto text-white px-4 relative">
+            {showModal ? <FoodLogModal showModal={showModal} setShowModal={setShowModal} /> : null}
             <div className="flex items-center justify-between mt-4">
                 <div>
                     <h2 className="font-bold text-2xl">Food Logger</h2>
                     <p className="text-gray-400">Track your daily nutrition</p>
                 </div>
-                <button className="px-4 py-2 bg-white text-black font-bold rounded-md cursor-pointer">+ Add Food</button>
+                <button onClick={handleAddFoodClick} className="px-4 py-2 bg-white text-black font-bold z-0 rounded-md cursor-pointer">+ Add Food</button>
             </div>
             <div className="grid md:grid-cols-3 gap-4 mt-8">
                 <Container>

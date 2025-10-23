@@ -4,9 +4,14 @@ import { FaRegHeart } from 'react-icons/fa6'
 import { FiBarChart2 } from 'react-icons/fi'
 import { GoGoal, GoGraph } from 'react-icons/go'
 import { LuApple } from 'react-icons/lu'
-import { Link } from 'react-router'
+import { useSelector } from 'react-redux'
+import { Link, Navigate } from 'react-router'
 
 const HomePage = () => {
+  const user = useSelector(state => state.user.user)
+  if(typeof user === 'object' && Object.keys(user).length > 0) {
+    return <Navigate to='/dashboard' /> 
+  }
   return (
     <div>
       <div className='bg-black text-white flex flex-col justify-center items-center gap-4 py-16 px-4'>
