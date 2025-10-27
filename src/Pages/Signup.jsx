@@ -23,7 +23,7 @@ const SignUp = () => {
         try {
             const res = await axios.post(`${import.meta.env.VITE_SERVER_URL}/auth/register`, {name, email, password, rePassword})
             setEmail(res.data?.email)
-            notifySuccess(res.data.message, '')
+            notifySuccess('User registered successfully.', '')
             navigate('/login')
             // navigate('/verifyemail', {state: {email}})
             setEmail(null)

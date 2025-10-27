@@ -47,7 +47,7 @@ const GoalSetting = () => {
             <div className="mt-6">
               <div className="flex gap-4">
                 <LuApple className="text-2xl font-bold" />
-                <h3 className="text-xl font-medium">Neutrition Goals</h3>
+                <h3 className="text-xl font-medium">Nutrition Goals</h3>
               </div>
               <div className="flex flex-col items-start justify-center gap-2 mt-4">
                 <label htmlFor="goal-setting-weight">Daily Target Calories (Kcal)</label>

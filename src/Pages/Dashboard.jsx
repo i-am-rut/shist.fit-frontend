@@ -37,9 +37,9 @@ const data = [
 ]
 
 const macroData = [
-  {name: 'Fats', amount: 30},
-  {name: 'Carbs', amount: 45},
-  {name: 'Proteins', amount: 25}
+  {name: 'Fats', amount: 10},
+  {name: 'Carbs', amount: 10},
+  {name: 'Proteins', amount: 10}
 ]
 
 const COLORS = ['#309898', '#F4631E', '#CB0404'];

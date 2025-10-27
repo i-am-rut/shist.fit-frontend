@@ -48,8 +48,8 @@ const Profile = () => {
                             <input id="profile-height" type="number" min={50} max={300} className="px-4 py-2 border border-gray-600 rounded-lg" placeholder="Enter your height in cm."/>
                         </div>
                         <div className="flex flex-col gap-2 mt-4">
-                            <label htmlFor="profile-weight">Current weight (Kg)</label>
-                            <input id="profile-weight" type="number" min={30} max={250} className="px-4 py-2 border border-gray-600 rounded-lg" placeholder="Enter current weight in Kg" />
+                            <label htmlFor="profile-heartrate">Resting Heart Rate (BPM)</label>
+                            <input id="profile-heartrate" type="number" min={0} max={300} className="px-4 py-2 border border-gray-600 rounded-lg" placeholder="Enter your resting heartrate"/>
                         </div>
                         <button className="px-4 py-2 bg-white text-black rounded-lg w-40 font-medium">Save Changes</button>
                     </form>
