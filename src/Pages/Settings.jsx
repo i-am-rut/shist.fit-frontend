@@ -3,6 +3,8 @@ import api from "../utils/api"
 import axios from "axios"
 import { notifyError, notifySuccess } from "../utils/toasts"
 import Modal from "../components/Modal"
+import { useDispatch } from "react-redux"
+import { setUser } from "../utils/slices/userSlice"
 
 const Settings = () => {
     const [formdata, setFormData] = useState({
@@ -12,6 +14,8 @@ const Settings = () => {
     })
     const [error, setError] = useState('')
     const [show, setShow] = useState(false)
+
+    const dispatch = useDispatch()
 
     const validatePasswords = () => {
         const {password, newPassword, reNewPassword} = formdata
@@ -48,28 +52,14 @@ const Settings = () => {
         }
     }
 
-    const Logout = async() => {
-    try {
-      const res = await axios.post(`${import.meta.env.VITE_SERVER_URL}/auth/logout`, {}, {withCredentials: true})
-      dispatch(setUser('null'))
-      notifySuccess("Logged out successfully")
-    }catch (err) {
-      if(err.response?.data?.message || err.response?.data?.error) {
-          notifyError('Failed to Logout', err.response?.data?.message || err.response?.data?.error)
-      } else {
-          console.error(err.response)
-          notifyError('Failed to Logout', 'Try again after some time.')
-      }
-    }
-  }
-
     const handleDeleteAccountYesClick = async() => {
         try {
             const res = await api.patch('/auth/delete-account', {}, {withCredentials: true})
-            console.log(res)
-            Logout()
+            notifySuccess(res.data?.message, '')
+            dispatch(setUser('null'))
         }catch(err) {
             console.log(err)
+            notifyError(err.response?.data?.message || err.response?.data?.error)
         }
     }
 

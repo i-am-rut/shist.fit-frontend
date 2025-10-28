@@ -5,6 +5,10 @@ import { noFoodLoggedImg } from "../assets/constants"
 import Container from "../components/Container"
 import { useState } from "react"
 import FoodLogModal from "../components/FoodLogModal"
+import api from "../utils/api"
+import { useDispatch, useSelector } from "react-redux"
+import { setTodayWater } from "../utils/slices/waterSlice"
+import { notifyError, notifySuccess } from "../utils/toasts"
 
 const recentFoods = [
     { name: "Oatmeal with berries", calories: 420, time: "8:30 AM", meal: "Breakfast" },
@@ -13,7 +17,11 @@ const recentFoods = [
 ]
 
 const FoodLogger = () => {
+    const dispatch = useDispatch()
     const [showModal, setShowModal] = useState(false)
+
+    const water = useSelector(state => state.water)
+
     const tagColor = {
         Breakfast: "#309898",
         Lunch: "#FF9F00",
@@ -23,6 +31,16 @@ const FoodLogger = () => {
 
     const handleAddFoodClick = () => {
         setShowModal(true)
+    }
+
+    const handleQuickOneGlass = async() => {
+        try {
+            const res = await api.post('/water', {glasses: 1}, {withCredentials: true})
+            dispatch(setTodayWater(res.data?.entry))
+            notifySuccess("Water glass added sucessfully!")
+        } catch (err) {
+            notifyError(err.response?.data?.message || err.response?.data?.error, '')
+        }
     }
 
     return (
@@ -56,7 +74,9 @@ const FoodLogger = () => {
                 <Container>
                     <h3 className="font-bold text-xl">Quick Add</h3>
                     <div className="flex flex-col items-start gap-2 mt-2">
-                        <button className="px-2 py-1 border border-gray-300 rounded-md w-[100%] text-left cursor-pointer"> + Water 1 glass (300ml)</button>
+                        <button
+                            onClick={handleQuickOneGlass}
+                            className="px-2 py-1 border border-gray-300 rounded-md w-[100%] text-left cursor-pointer"> + Water 1 glass (250ml)</button>
                         <button className="px-2 py-1 border border-gray-300 rounded-md w-[100%] text-left cursor-pointer">+ coffee</button>
                         <button className="px-2 py-1 border border-gray-300 rounded-md w-[100%] text-left cursor-pointer">+ Green Tea</button>
                     </div>

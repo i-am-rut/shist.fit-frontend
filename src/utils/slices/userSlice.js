@@ -1,4 +1,3 @@
-// store/userSlice.js
 import { createSlice } from "@reduxjs/toolkit";
 
 const storedUser = localStorage.getItem("user");
@@ -11,11 +10,11 @@ const userSlice = createSlice({
   reducers: {
     setUser: (state, action) => {
       state.user = action.payload;
-      localStorage.setItem("user", JSON.stringify(action.payload)); // persist user
+      localStorage.setItem("user", JSON.stringify(action.payload)); 
     },
     removeUser: (state) => {
       state.user = null;
-      localStorage.removeItem("user"); // remove persisted user
+      localStorage.removeItem("user"); 
     },
   },
 });

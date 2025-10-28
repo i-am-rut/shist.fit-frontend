@@ -3,15 +3,36 @@ import { createSlice } from "@reduxjs/toolkit";
 const foodSlice = createSlice({
   name: "food",
   initialState: {
-    todayCalories: null,   // total calories today
+    todayCalories: null,   
     todayMacros: null,     // { protein, carbs, fats }
-    recentMeals: [],       // last 4 meals logged
+    recentMeals: [],       
     loading: false,
     error: null,
   },
   reducers: {
     setTodayCalories: (state, action) => {
       state.todayCalories = action.payload;
+    },
+    incrementTotalCalories: (state, action) => {
+      const addValue = action.payload;
+      state.todayCalories = (state.todayCalories || 0) + addValue;
+    },
+    incrementTotalMacros: (state, action) => {
+      const { carbs = 0, protein = 0, fats = 0 } = action.payload || {};
+      if (!state.todayMacros) state.todayMacros = { carbs: 0, protein: 0, fats: 0 };
+      state.todayMacros.carbs += carbs;
+      state.todayMacros.protein += protein;
+      state.todayMacros.fats += fats;
+    },
+    updateRecentMeals: (state, action) => {
+      const newEntry = action.payload;
+      if (!Array.isArray(state.recentMeals)) state.recentMeals = [];
+
+      if (state.recentMeals.length >= 4) {
+        state.recentMeals.shift();
+      }
+
+      state.recentMeals.push(newEntry);
     },
     setTodayMacros: (state, action) => {
       state.todayMacros = action.payload;
@@ -41,7 +62,10 @@ const foodSlice = createSlice({
 export const {
   setTodayCalories,
   setTodayMacros,
+  incrementTotalCalories,
+  incrementTotalMacros,
   setRecentMeals,
+  updateRecentMeals,
   setFoodStreak,
   setFoodLoading,
   setFoodError,

@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const sleepSlice = createSlice({
   name: "sleep",
   initialState: {
-    lastNight: null,        // last night's sleep entry
+    lastNight: null,        
     past7Days: [],          // [{ date, duration }]
     loading: false,
     error: null,
