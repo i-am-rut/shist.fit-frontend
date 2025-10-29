@@ -16,10 +16,11 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 20
+          node-version: 20.16.0
 
       - name: Install and Build
         run: |
+          echo "VITE_SERVER_URL=${{ secrets.VITE_SERVER_URL }}" >> .env
           npm install
           npm run build
 
@@ -30,6 +31,12 @@ jobs:
           chmod 600 ~/.ssh/deploy_key
           ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
 
-      - name: Upload built files to EC2
+      - name: Upload and deploy built files to EC2
         run: |
-          scp -i ~/.ssh/deploy_key -r dist/* ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/var/www/html/
+          scp -i ~/.ssh/deploy_key -r dist/* ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/home/ubuntu/shist.fit-frontend/dist
+          ssh -i ~/.ssh/deploy_key ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} '
+            cd ~/shist.fit-frontend
+            sudo rm -rf ./dist/*
+            sudo mv ~/shist.fit-frontend/dist/* ./dist/
+            sudo rm -rf ~/shist.fit-frontend/dist
+          '
