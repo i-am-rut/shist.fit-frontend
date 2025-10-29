@@ -38,9 +38,10 @@ const Dashboard = () => {
       try {
         dispatch(setGoalsLoading(true))
         const res = await api.get('/goals', {withCredentials: true})
-        if(res.data?.length === 0) {
+        if (!Array.isArray(res.data) || res.data.length === 0) {
           navigate('/goals/goal-settings')
           notifyWarning('Set your health goals!')
+          return
         }else {
           const {weight, water, sleep, steps, calorie} = res.data[0]
           dispatch(setGoals({weight, water, sleep, steps, calorie}))
