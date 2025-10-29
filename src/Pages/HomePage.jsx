@@ -9,7 +9,7 @@ import { Link, Navigate } from 'react-router'
 
 const HomePage = () => {
   const user = useSelector(state => state.user.user)
-  if(typeof user === 'object' && Object.keys(user).length > 0) {
+  if(user && typeof user === 'object' && Object.keys(user).length > 0) {
     return <Navigate to='/dashboard' /> 
   }
   return (
