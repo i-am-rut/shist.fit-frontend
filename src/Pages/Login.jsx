@@ -44,6 +44,7 @@ const Login = () => {
             }
         }
     }
+    console.log(reason)
 
     return (
         <div>
@@ -57,9 +58,9 @@ const Login = () => {
                         <h1>Shist</h1>
                     </div>
                     <div className="sm:w-[500px] flex flex-col gap-4 bg-black text-white px-4 py-8 mb-8  rounded-lg">
-                        {reason === 'auth_required' && <p className="text-red-600 font-bold text-xl text-center">You must login first!</p>}
-                        {reason === 'logout' && <p className="text-green-600 font-bold text-xl text-center">You have been logged out successfully!</p>}
-                        {reason === 'deactivate' && <p className="text-green-600 font-bold text-xl text-center">Your account has been successfully deactivated.</p>}
+                        {reason === 'auth_required' ? <p className="text-red-600 font-bold text-xl text-center">You must login first!</p> : null}
+                        {reason === 'logout' ? <p className="text-green-600 font-bold text-xl text-center">You have been logged out successfully!</p> : null}
+                        {reason === 'deactivate' ? <p className="text-green-600 font-bold text-xl text-center">Your account has been successfully deactivated.</p> : null}
                         <h2 className="text-2xl font-bold">Log in</h2>
                         <p className="text-gray-400">Enter your email and password to access your account</p>
                         <form className="flex flex-col gap-4">

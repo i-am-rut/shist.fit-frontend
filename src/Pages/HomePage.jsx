@@ -34,12 +34,12 @@ const HomePage = () => {
           <div className='bg-black p-4 text-center flex flex-col items-center justify-center gap-4'>
             <FaBalanceScale style={{fontWeight: "bolder", fontSize: "72px", backgroundColor: "#18181a", padding: "20px", borderRadius: "50%"}} />
             <h3 className='text-xl font-bold'>Weight Management</h3>
-            <p className='pb-4 text-gray-400'>Log your meals, track calories, and monitor your macronutrient intake with our comprehensive food database.</p>
+            <p className='pb-4 text-gray-400'>Set weight goals, track your progress, and visualize your journey with interactive charts and insights.</p>
           </div>
           <div className='bg-black p-4 text-center flex flex-col items-center justify-center gap-4'>
             <GoGoal style={{fontWeight: "bolder", fontSize: "72px", backgroundColor: "#18181a", padding: "20px", borderRadius: "50%"}} />
             <h3 className='text-xl font-bold'>Goal Setting</h3>
-            <p className='pb-4 text-gray-400'>Log your meals, track calories, and monitor your macronutrient intake with our comprehensive food database.</p>
+            <p className='pb-4 text-gray-400'>Create personalized health goals and track your progress with customizable dashboards.</p>
           </div>
         </div>
       </div>
