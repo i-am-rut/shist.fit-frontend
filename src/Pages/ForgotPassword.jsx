@@ -1,12 +1,16 @@
 import { IoMdPulse } from "react-icons/io"
 import Footer from "../components/Footer"
 import { FaArrowLeft } from "react-icons/fa6"
-import { Link, useNavigate } from "react-router"
-import { notifySuccess } from "../utils/toasts.jsx"
+import { Link, Navigate } from "react-router"
+import { useSelector } from "react-redux"
 
 
 const ForgotPassword = () => {
     const page = 'otp'
+    const user = useSelector(state => state.user.user)
+    if(user) {
+        return <Navigate to='/dashboard' /> 
+    }
     // const navigate = useNavigate()
     // const handleRequestOTP = () => {
     //     notifySuccess("Otp sent")

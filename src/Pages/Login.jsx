@@ -1,11 +1,11 @@
 import { FaArrowLeft } from "react-icons/fa6";
 import { IoMdPulse } from "react-icons/io";
 import Footer from "../components/Footer";
-import { Link, useLocation, useNavigate } from "react-router";
+import { Link, Navigate, useLocation, useNavigate } from "react-router";
 import { useState } from "react";
 import axios from "axios";
 import { notifyError, notifySuccess } from "../utils/toasts";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../utils/slices/userSlice";
 
 const Login = () => {
@@ -15,6 +15,11 @@ const Login = () => {
     const dispatch = useDispatch()
     const location = useLocation()
     const from = location.state?.from
+    const reason = location.state?.reason
+    const user = useSelector(state => state.user.user)
+    if(user) {
+        return <Navigate to='/dashboard' /> 
+    }
 
     const handleLogin = async (e) => {
         e.preventDefault()
@@ -31,7 +36,6 @@ const Login = () => {
             //     navigate('/verifyemail', {state: {email}})
             // }
         } catch (err) {
-            console.log(err)
             if(err.response?.data?.message || err.response?.data?.error) {
                 notifyError('Failed to Login', err.response?.data?.message || err.response?.data?.error)
             } else {
@@ -53,7 +57,9 @@ const Login = () => {
                         <h1>Shist</h1>
                     </div>
                     <div className="sm:w-[500px] flex flex-col gap-4 bg-black text-white px-4 py-8 mb-8  rounded-lg">
-                        {from ? <p className="text-red-600 font-bold text-xl text-center">You must login first!</p> : null}
+                        {reason === 'auth_required' && <p className="text-red-600 font-bold text-xl text-center">You must login first!</p>}
+                        {reason === 'logout' && <p className="text-green-600 font-bold text-xl text-center">You have been logged out successfully!</p>}
+                        {reason === 'deactivate' && <p className="text-green-600 font-bold text-xl text-center">Your account has been successfully deactivated.</p>}
                         <h2 className="text-2xl font-bold">Log in</h2>
                         <p className="text-gray-400">Enter your email and password to access your account</p>
                         <form className="flex flex-col gap-4">
@@ -80,7 +86,7 @@ const Login = () => {
                                     type='password'
                                     onChange={e => setPassword(e.target.value)} 
                                     placeholder="********" />
-                                <Link className="text-gray-400 self-end cursor-pointer" to='/forgotpassword'>Forgot password?</Link>
+                                {/* <Link className="text-gray-400 self-end cursor-pointer" to='/forgotpassword'>Forgot password?</Link> */}
                             </div>
                             <button 
                                 className="py-2 bg-white w-[100%] text-black font-medium rounded-lg cursor-pointer"

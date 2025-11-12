@@ -1,23 +1,52 @@
 import { createSlice } from "@reduxjs/toolkit";
-
-const storedUser = localStorage.getItem("user");
+import axios from "axios";
 
 const userSlice = createSlice({
   name: "user",
-  initialState: {
-    user: storedUser ? JSON.parse(storedUser) : null,
+  initialState : {
+    user:  null, 
+    status: "idle", // "idle" / "checking" / "authenticated" / "unauthenticated"
+    isLogout: false,
+    isDeactivate: false,
+    tokenExpired: false,
   },
   reducers: {
-    setUser: (state, action) => {
-      state.user = action.payload;
-      localStorage.setItem("user", JSON.stringify(action.payload)); 
+    startCheckingAuth: (state) => {
+      state.status = "checking";
     },
-    removeUser: (state) => {
+    setUser: (state, action) => {
+      state.isLogout = false
+      state.user = action.payload;
+      state.status = "authenticated";
+      state.tokenExpired = false;
+    },
+    removeUser: (state, action) => {
+      const {logout, deactivate} = action?.payload
       state.user = null;
-      localStorage.removeItem("user"); 
+      state.isLogout = logout === true ? logout : false
+      state.isDeactivate = deactivate === true ? deactivate : false
+      state.status = "unauthenticated";
+    },
+    setTokenExpired: (state) => {
+      state.tokenExpired = true;
+      state.status = "unauthenticated";
+      state.user = null;
     },
   },
 });
 
-export const { setUser, removeUser } = userSlice.actions;
+
+
+export const checkAuth = () => async (dispatch) => {
+  dispatch(startCheckingAuth());
+  try {
+    const res = await axios.get(`${import.meta.env.VITE_SERVER_URL}/auth/me`, { withCredentials: true });
+    dispatch(setUser(res.data));
+  } catch (err) {
+    console.error(err.response?.data)
+    dispatch(setTokenExpired());
+  }
+};
+
+export const { startCheckingAuth, setUser, removeUser, setTokenExpired } = userSlice.actions;
 export default userSlice.reducer;

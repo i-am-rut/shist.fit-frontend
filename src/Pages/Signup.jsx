@@ -1,12 +1,17 @@
 import { FaArrowLeft } from "react-icons/fa6";
 import { IoMdPulse } from "react-icons/io";
 import Footer from "../components/Footer";
-import { Link, useNavigate } from "react-router";
+import { Link, Navigate, useNavigate } from "react-router";
 import { useState } from "react";
 import axios from "axios";
 import { notifyError, notifySuccess } from "../utils/toasts";
+import { useSelector } from "react-redux";
 
 const SignUp = () => {
+    const user = useSelector(state => state.user.user)
+    if(user) {
+        return <Navigate to='/dashboard' /> 
+    }
 
     const [formData, setFormData] = useState({
         name: '',
@@ -16,6 +21,7 @@ const SignUp = () => {
     })
     const [email, setEmail] = useState(null)
     const navigate = useNavigate()
+    
     const handleSignUp = async(e) => {
         e.preventDefault()
         const { email, password, rePassword} = formData

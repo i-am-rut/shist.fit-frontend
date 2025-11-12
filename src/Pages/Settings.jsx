@@ -1,10 +1,9 @@
 import { useState } from "react"
 import api from "../utils/api"
-import axios from "axios"
 import { notifyError, notifySuccess } from "../utils/toasts"
 import Modal from "../components/Modal"
 import { useDispatch } from "react-redux"
-import { setUser } from "../utils/slices/userSlice"
+import { removeUser } from "../utils/slices/userSlice"
 
 const Settings = () => {
     const [formdata, setFormData] = useState({
@@ -56,9 +55,9 @@ const Settings = () => {
         try {
             const res = await api.patch('/auth/delete-account', {}, {withCredentials: true})
             notifySuccess(res.data?.message, '')
-            dispatch(setUser('null'))
+            dispatch(removeUser({logout: false, deactivate: true}))
         }catch(err) {
-            console.log(err)
+            console.error(err.response?.data)
             notifyError(err.response?.data?.message || err.response?.data?.error)
         }
     }

@@ -1,14 +1,19 @@
 import { useEffect, useState } from 'react';
-import { useSearchParams, useNavigate } from 'react-router';
+import { useSearchParams, useNavigate, Navigate } from 'react-router';
 import axios from 'axios';
 import { notifyError, notifySuccess } from '../utils/toasts'; 
 import Loader from '../components/Loader'; 
+import { useSelector } from 'react-redux';
 
 const Verify = () => {
   const [searchParams] = useSearchParams();
   const [status, setStatus] = useState('verifying'); // 'verifying', 'success', 'error'
   const token = searchParams.get('token');
   const navigate = useNavigate();
+  const user = useSelector(state => state.user.user)
+  if(user) {
+    return <Navigate to='/dashboard' /> 
+  }
 
   useEffect(() => {
     const verifyEmail = async () => {
