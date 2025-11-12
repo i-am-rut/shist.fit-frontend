@@ -7,8 +7,8 @@ import { PiGearBold } from "react-icons/pi"
 import { TbLogout } from "react-icons/tb"
 import { useDispatch, useSelector } from "react-redux"
 import { Link, NavLink } from "react-router"
-import { notifyError, notifySuccess } from "../utils/toasts"
-import { setUser } from "../utils/slices/userSlice"
+import { notifySuccess } from "../utils/toasts"
+import { removeUser } from "../utils/slices/userSlice"
 
 const Navbar = () => {
   const user = useSelector(state => state.user.user) 
@@ -21,13 +21,13 @@ const Navbar = () => {
   const handleLogoutClick = async() => {
     try {
       const res = await axios.post(`${import.meta.env.VITE_SERVER_URL}/auth/logout`, {}, {withCredentials: true})
-      dispatch(setUser('null'))
+      dispatch(removeUser({logout: true, deactivate: false}))
       notifySuccess("Logged out successfully")
     }catch (err) {
       if(err.response?.data?.message || err.response?.data?.error) {
           notifyError('Failed to Logout', err.response?.data?.message || err.response?.data?.error)
       } else {
-          console.error(err.response)
+          console.error(err.response?.data)
           notifyError('Failed to Logout', 'Try again after some time.')
       }
     }
@@ -50,14 +50,13 @@ const Navbar = () => {
   }
 }, [])
 
-
   return (
     <header className={`bg-black text-white flex items-center justify-between p-4 lg:px-24 border-b-2 border-gray-500`}>
       <div className="flex gap-2 items-center">
         <IoMdPulse className="text-2xl" />
         <h1 className="font-bold text-2xl">Shist</h1>
       </div>
-      {(user && user !== 'null') && 
+      {(user) && 
         <div className="flex items-center justify-between">
           <div className="hidden sm:flex gap-4 text-gray-400">
             <NavLink className={({ isActive }) => `${isActive ? ' text-white font-bold' : ''}`} to='/dashboard'>Dashboard</NavLink>
@@ -66,7 +65,7 @@ const Navbar = () => {
           </div>
         </div>
       }
-      {(user && user !== 'null') && 
+      {(user) && 
         <div className="flex gap-5">
           <div className="sm:hidden flex items-center gap-4">
             <MdMenu onClick={() => setShowDrawer(true)} className="text-4xl py-0.5 px-1 cursor-pointer  border-3 border-white  rounded-md" />
@@ -112,7 +111,7 @@ const Navbar = () => {
           )}
         </div>
       }
-      {(!user || user === 'null') && 
+      {(!user) && 
         <div className="flex gap-2">
           <Link className={`bg-black border-2 font-medium border-gray-600 py-2 px-4 rounded-lg`} to='/login' >Log in</Link>
           <Link className="bg-white text-gray-900 font-medium border-2 border-gray-600 py-2 px-4 rounded-lg" to='/signup' >Sign up</Link>

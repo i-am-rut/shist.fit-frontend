@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router"
-import AppLayout from "./Pages/AppLayout"
+import AppLayout from "./layouts/AppLayout"
 import HomePage from "./Pages/HomePage"
 import SignUp from "./Pages/Signup"
 import Login from "./Pages/Login"
@@ -8,7 +8,7 @@ import Feedback from "./Pages/Feedback"
 import ForgotPassword from "./Pages/ForgotPassword"
 import Page404 from "./Pages/404"
 import Dashboard from "./Pages/Dashboard"
-import DashboardLayout from "./Pages/DashboardLayout"
+import DashboardLayout from "./layouts/DashboardLayout"
 import FoodLogger from "./Pages/FoodLogger"
 import HealthMetrics from "./Pages/HealthMetrics"
 import HealthMetricsWeight from "./Pages/HealthMetricsWeight"
@@ -21,12 +21,31 @@ import GoalsOverview from "./Pages/GoalsOverview"
 import Profile from "./Pages/Profile"
 import Settings from "./Pages/Settings"
 import { Bounce, ToastContainer } from "react-toastify"
-import AuthLayout from "./Pages/AuthLayout"
+import AuthLayout from "./layouts/AuthLayout"
 import ScrollToTop from "./components/ScrollToTop"
 import Verify from "./Pages/Verify"
+import { useDispatch, useSelector } from "react-redux"
+import { useEffect } from "react"
+import { checkAuth } from "./utils/slices/userSlice"
+import Loader from "./components/Loader"
 
 
 function App() {
+  const dispatch = useDispatch()
+  const status = useSelector(state => state.user.status)
+
+  useEffect(() => {
+    dispatch(checkAuth())
+  }, [dispatch])
+
+  if(status === "checking" || status === 'idle') {
+    return (
+        <div className='flex flex-col gap-4 items-center justify-center h-screen bg-black'>
+            <Loader />
+            <p className="text-white font-bold">Checking authentication...</p>
+        </div>
+    )
+  }
 
   return (
     <>

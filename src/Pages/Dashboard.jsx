@@ -2,17 +2,16 @@ import Container from "../components/Container"
 import { LuApple, LuCalendarDays, LuDroplets } from "react-icons/lu"
 import ProgressBar from "../components/ProgressBar"
 import { GoGoal } from "react-icons/go"
-import { BsGraphUpArrow } from "react-icons/bs"
 import { CartesianGrid, Cell, Legend, Line, LineChart, Pie, PieChart, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts"
 import { useDispatch, useSelector } from "react-redux"
-import { setCurrentWeight, setPast7DaysWeight, setWeightError, setWeightLoading } from "../utils/slices/weightSlice"
-import { setPast7DaysWater, setTodayWater, setWaterError, setWaterLoading } from "../utils/slices/waterSlice"
+import { setCurrentWeight, setPast7DaysWeight, setWeightLoading } from "../utils/slices/weightSlice"
+import { setTodayWater, setWaterLoading } from "../utils/slices/waterSlice"
 import { setGoals, setGoalsError, setGoalsLoading } from "../utils/slices/goalsSlice"
 import api from "../utils/api"
 import { useEffect, useState } from "react"
 import { notifyError, notifySuccess, notifyWarning } from "../utils/toasts"
 import { useNavigate } from "react-router"
-import { setFoodError, setFoodLoading, setRecentMeals, setTodayCalories, setTodayMacros } from "../utils/slices/foodSlice"
+import { setFoodLoading, setRecentMeals, setTodayCalories, setTodayMacros } from "../utils/slices/foodSlice"
 
 
 const Dashboard = () => {
@@ -47,7 +46,7 @@ const Dashboard = () => {
           dispatch(setGoals({weight, water, sleep, steps, calorie}))
         }
       } catch (err) {
-        console.error(err)
+        console.error(err.response?.data)
         dispatch(setGoalsError(err.response?.data?.message || "Failed to load goals"))
       } finally {
         dispatch(setGoalsLoading(false))
@@ -82,8 +81,7 @@ const Dashboard = () => {
         dispatch(setRecentMeals(fRecent.value?.data?.recentMeals))
 
       } catch (err) {
-        console.log(err, "Here")
-        const message = err.response?.data?.message || err.message || "Failed to fetch dashboard data"
+        const message = err.response?.data?.error || err.message || "Failed to fetch dashboard data"
         notifyError(message)
       }finally {
         dispatch(setWeightLoading(false))
@@ -159,7 +157,7 @@ const Dashboard = () => {
                   {goals.data?.calorie > food.todayCalories?.totalCalories ? `${goals.data?.calorie - food.todayCalories?.totalCalories} to goal` : `${food.todayCalories?.totalCalories - goals.data?.calorie} excess calories`}
                 </p>) : null}
               {food.todayCalories?.totalCalories ? 
-                <ProgressBar progress={Math.min(100, (food.todayCalories?.totalCalories / goals.data?.calorie) * 100)} /> 
+                <ProgressBar progress={Math.min(100, Math.floor((food.todayCalories?.totalCalories / goals.data?.calorie) * 100))} /> 
                 : (<button className="px-4 py-2 bg-white text-black font-bold z-0 rounded-md cursor-pointer mt-4" onClick={() => navigate('/dashboard/foodlog')} >Add Food</button>
               )}
             </>

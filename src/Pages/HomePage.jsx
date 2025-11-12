@@ -9,9 +9,10 @@ import { Link, Navigate } from 'react-router'
 
 const HomePage = () => {
   const user = useSelector(state => state.user.user)
-  if(user && typeof user === 'object' && Object.keys(user).length > 0) {
+  if(user) {
     return <Navigate to='/dashboard' /> 
   }
+  
   return (
     <div>
       <div className='bg-black text-white flex flex-col justify-center items-center gap-4 py-16 px-4'>
