@@ -24,6 +24,10 @@ jobs:
           npm install
           npm run build
 
+      - name: Inspect built JS
+        run: grep -R "VITE_SERVER_URL" dist || true
+
+
       - name: Setup SSH
         run: |
           mkdir -p ~/.ssh
