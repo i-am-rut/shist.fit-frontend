@@ -20,7 +20,7 @@ jobs:
 
       - name: Install and Build
         run: |
-          echo "VITE_SERVER_URL=${{ secrets.VITE_SERVER_URL }}" >> .env
+          echo "VITE_SERVER_URL=${{ secrets.VITE_SERVER_URL }}" > .env.production
           npm install
           npm run build
 
